@@ -1,0 +1,127 @@
+.chart-container{
+    max-width: 400px;
+    margin: auto;
+}
+.box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.box-content{
+    border-radius: 8px;
+    width: 280px;
+    height: 450px;
+    list-style: none;
+    padding: 8px;
+    margin: 16px;
+    background-color: #e4e4e4;
+    transition: all 0.25s;
+}
+.box-content:hover{
+    /* transform: scale(1.4);
+    background-color: #d3ebff;
+    z-index: 101; */
+    transform: scale(0.98)
+}
+/*
+@media screen and (max-width: 455px) {
+    .box-content:hover{
+        transform: scale(0.99);
+        background-color: #f0f0f0;
+        z-index: 89; 
+    }
+}
+*/
+.text-data{
+    border-left: 1px solid #b2b2b2;
+    padding: 8px 16px;
+    margin: 16px;
+}
+.photo-container{
+    text-align: center;
+}
+.photo{
+    width: 150px;
+    height: 150px;
+}
+.btn-control{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+.action{
+/* border: 1px solid #aeaeae; */
+}
+button, input[type=reset]{
+    background: transparent;
+    border: none;
+}
+.add-option{
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 280px;
+    height: 450px;
+    margin: 16px;
+}
+.fa-add{
+    font-size: 50px;
+    padding: 16px;
+    border: 1px dashed #006f9e;
+    color: #0086c0;
+    border-radius: 100%;
+    background-color: #d3d3d3;
+    transition: all 0.4s;
+}
+.fa-add:hover{
+    background-color: #006f9e;
+    color: #ffffff;
+    border: 1px dashed #ffffff;
+}
+
+.btn-menu{
+    padding: 8px;
+    margin: 8px;
+    border: 1px solid black;
+    border-radius: 16px;
+}
+@media screen and (max-width: 305px) {
+    .box-content{
+        width: 100%;
+        margin: 8px 0px;
+        padding: 4px;
+    }
+}
+.icon-img{
+    width: 45px;
+    height: 45px;
+}
+.delete, .edit{
+    border-radius: 80px;
+    transition: all 0.3s;
+    border: 1px solid transparent;
+}
+.delete:hover{
+    border: 1px solid red;
+    transform: scale(1.5);
+}
+.edit:hover{
+    border: 1px solid rgb(56, 58, 56);
+    transform: scale(1.5);
+}
+.prest-totale{
+    background-color: #136423;
+    color: #ffffff;
+    padding: 16px;
+    margin: 24px;
+}
+.show-btn{
+    border-radius: 0px;
+    padding: 8px 16px;
+    margin: 24px;
+}

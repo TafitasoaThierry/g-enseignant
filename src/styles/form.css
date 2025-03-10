@@ -1,0 +1,62 @@
+.container{
+  margin: 0 auto;
+  margin-top: 100px;
+} 
+h4{
+  text-align: center;
+  border: none;
+  padding: 16px 8px;
+  color: #0084BB;
+}
+.card{
+  border: none;
+  border: 1px solid #0084BB;
+  padding: 16px;
+  border-radius: 0px;
+  margin: 0 auto;
+  margin-bottom: 0px;
+}
+.control-btn{
+  margin: 8px 8px 8px auto;
+  padding: 8px;
+  width: 200px;
+}
+@media screen and (max-width : 740px) {
+  .control-btn{
+    width: 100%;
+  }
+  .card{
+    padding: 16px 0px;
+    border: none;
+  }
+}
+.cancel{
+  background-color: transparent;
+  border: 1px solid #0084BB;
+  border-radius: 0px;
+  color: #0084BB;
+}
+.save{
+  background-color: #0084BB;
+  border: 1px solid #0084BB;
+  border-radius: 0px;
+  color: #ffffff;
+}
+.cancel:hover, .cancel:valid{
+  background-color: transparent;
+  border: 1px solid #0084BB;
+  color: #0084BB;
+}
+.save:hover{
+  background-color: #0084BB;
+  border: 1px solid #0084BB;
+}
+.cancel, .save{
+  transition: all 0.2s ease-in-out;
+}
+.form-control{
+  border-radius: 0px;
+}
+label{
+  color: #525252;
+}
