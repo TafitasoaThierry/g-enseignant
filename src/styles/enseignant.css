@@ -2,86 +2,52 @@
     max-width: 400px;
     margin: auto;
 }
-.box{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-    flex-wrap: wrap;
+/* Here we go */
+table{
+    width: 100%;
+    padding: 16px;
+    margin: 16px;
+    border-radius: 80px;
+    border-collapse: collapse;
 }
-.box-content{
-    border-radius: 8px;
-    width: 280px;
-    height: 450px;
-    list-style: none;
+th{
     padding: 8px;
-    margin: 16px;
-    background-color: #e4e4e4;
-    transition: all 0.25s;
+    font-weight: bold;
+    background-color: #006f9e;
+    color: #ffffff;
 }
-.box-content:hover{
-    /* transform: scale(1.4);
-    background-color: #d3ebff;
-    z-index: 101; */
-    transform: scale(0.98)
+td{
+    padding: 16px;
+    border-bottom: 1px solid rgba(0,0,0,0.3);
 }
-/*
-@media screen and (max-width: 455px) {
-    .box-content:hover{
-        transform: scale(0.99);
-        background-color: #f0f0f0;
-        z-index: 89; 
-    }
-}
-*/
-.text-data{
-    border-left: 1px solid #b2b2b2;
-    padding: 8px 16px;
-    margin: 16px;
-}
-.photo-container{
-    text-align: center;
-}
-.photo{
-    width: 150px;
-    height: 150px;
-}
-.btn-control{
-    list-style: none;
-    display: flex;
-    align-items: center;
-    justify-content: right;
-}
-.action{
-/* border: 1px solid #aeaeae; */
-}
-button, input[type=reset]{
+.photo-2{
+    width: 60px;
+    height: 60px;
+    padding-right: 0px;
+    border-radius: 100%;
+    border: 1px solid #b4b4b4;
+} /* end */
+
+button{
     background: transparent;
     border: none;
 }
-.add-option{
-    background-color: #FFFFFF;
+.option{
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
-    width: 280px;
-    height: 450px;
-    margin: 16px;
 }
 .fa-add{
-    font-size: 50px;
-    padding: 16px;
-    border: 1px dashed #006f9e;
-    color: #0086c0;
-    border-radius: 100%;
-    background-color: #d3d3d3;
-    transition: all 0.4s;
-}
-.fa-add:hover{
     background-color: #006f9e;
     color: #ffffff;
-    border: 1px dashed #ffffff;
+    font-size: 20px;
+    padding: 16px;
+    margin: 8px;
+    border-radius: 100%;
+    transition: all 0.2s;
+}
+.fa-add:hover{
+    transform: scale(1.4);
 }
 
 .btn-menu{
@@ -123,5 +89,16 @@ button, input[type=reset]{
 .show-btn{
     border-radius: 0px;
     padding: 8px 16px;
-    margin: 24px;
+    margin: 16px;
+}
+.search{
+    display: flex;
+    align-items: center;
+}
+.search-icon{
+    width: 70px;
+}
+.search-input{
+    margin: 16px 8px;
+    width: 40%;
 }

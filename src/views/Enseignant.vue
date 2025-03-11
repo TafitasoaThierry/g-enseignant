@@ -1,18 +1,39 @@
 <template>
   <div class="container">
-    <form class="search" v-show="addForm == false">
-      <!-- <div>
-        <ul class="nav">
-          <li><input type="search" class="search-input" placeholder="Entrer matricule ou nom"></li>
-          <li><button class="btn-menu">Tout</button></li>
-          <li><button class="btn-menu">Prestation minimun</button></li>
-          <li><button class="btn-menu">Prestation maximum</button></li>
-          <li><button class="btn-menu">Prestation</button></li>
-        </ul>
-      </div> -->
-    </form>
-    <div class="box" v-show="addForm == false">
-      <div class="add-option"><button v-on:click="addForm = true"><i class="fa-solid fa-add"></i></button></div>
+    <div class="search" v-show="addForm == false">
+      <em style="padding: 16px">Rechercher par</em>
+      <input type="text" class="form-control search-input" placeholder="Nom ou Matricule"> 
+    </div>
+    <div class="option" v-show="addForm == false">
+      <button v-on:click="addForm = true"><i class="fa-solid fa-add"></i></button>
+      
+    </div>
+    <table class="table-info" v-show="addForm == false">
+      <tr>
+        <th colspan="2" style="padding: 16px 32px;">Nom</th>
+        <th>Nombre d'heures</th>
+        <th>Taux horaire</th>
+        <th>Prestation</th>
+        <th colspan="2" style="padding: 16px 24px;">Actions</th>
+      </tr>
+      <tr v-for="enseignant in this.enseignants" :key="enseignant.matricule">
+        <td style="text-align: center;"><img src="../assets/images/user.png" alt="photo" class="photo-2"></td>
+        <td style="padding-left: 0px;">
+          <em>{{ enseignant.nom }}</em><br>
+          <b>Matricule: {{ enseignant.matricule }}</b>
+        </td>
+        <td>{{ enseignant.nbHeure }}</td>
+        <td>{{ enseignant.tauxHoraire }}</td>
+        <td>{{ enseignant.nbHeure * enseignant.tauxHoraire }}</td>
+        <td><button @click="deleteEnseignant(enseignant.matricule)"><i class="fa-solid action delete"><img src="../assets/images/delete.png" class="icon-img"></i></button></td>
+        <td><RouterLink :to="{ path: '/'+JSON.stringify(enseignant)+'/edit'}"><button ><i class="fa-solid action edit"><img src="../assets/images/edit.png" class="icon-img"></i></button></Routerlink></td>
+      </tr>
+    </table>
+    <div v-show="viewController">
+      <button class="btn btn-primary show-btn" @click="showMore(more = true)" v-if="more == false">Voir tout</button>
+      <button class="btn btn-primary show-btn" @click="showLess(more = false)" v-else>Voir moins</button>
+    </div>
+    <!-- <div class="box" v-show="addForm == false">
       <ul class="box-content" v-for="enseignant in this.enseignants" :key="enseignant.matricule">
         <p class="photo-container"><img src="../assets/images/lecture.png" alt="photo" class="photo"></p>
         <li>
@@ -29,12 +50,8 @@
           <li>Prestation: {{ enseignant.nbHeure * enseignant.tauxHoraire }}</li>
         </div>
       </ul>
-    </div>
+    </div> -->
     <div v-show="addForm == false">
-      <div v-show="viewController">
-        <button class="btn btn-primary show-btn" @click="showMore(more = true)" v-if="more == false">Voir plus..</button>
-        <button class="btn btn-primary show-btn" @click="showLess(more = false)" v-else>Voir moins..</button>
-      </div>
       <h6 class="prest-totale">Prestation totale : {{ prestationTotal }}</h6>
     </div>
   </div>
