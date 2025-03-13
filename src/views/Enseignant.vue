@@ -1,41 +1,48 @@
 <template>
   <div class="container">
     <div class="search" v-show="addForm == false">
-      <em style="padding: 16px">Rechercher par</em>
-      <input type="text" class="form-control search-input" placeholder="Nom ou Matricule"> 
+      <div class="option" v-show="addForm == false">
+        <button v-on:click="addForm = true; viewController = false"><i class="fa-solid fa-add"></i></button>
+      </div>
+      <em style="padding: 8px 0px">Rechercher par</em>
+      <input type="text" class="form-control search-input" placeholder="Nom ou Matricule">
     </div>
-    <div class="option" v-show="addForm == false">
-      <button v-on:click="addForm = true"><i class="fa-solid fa-add"></i></button>
-      
-    </div>
+    
     <table class="table-info" v-show="addForm == false">
       <tr>
-        <th colspan="2" style="padding: 16px 32px;">Nom</th>
+        <th colspan="2" style="padding: 16px 26px;">Nom</th>
         <th>Nombre d'heures</th>
         <th>Taux horaire</th>
         <th>Prestation</th>
-        <th colspan="2" style="padding: 16px 24px;">Actions</th>
+        <th colspan="2" style="padding: 16px 26px;">Actions</th>
       </tr>
       <tr v-for="enseignant in this.enseignants" :key="enseignant.matricule">
-        <td style="text-align: center;"><img src="../assets/images/user.png" alt="photo" class="photo-2"></td>
-        <td style="padding-left: 0px;">
-          <em>{{ enseignant.nom }}</em><br>
-          <b>Matricule: {{ enseignant.matricule }}</b>
+        <td>
+          <p class="first-char">{{ enseignant.nom[0] }}</p>
+        </td>
+        <td style="padding-left: 0px">
+          <p>
+            <em>{{ enseignant.nom }}</em><br>
+            <b>Matricule: {{ enseignant.matricule }}</b>
+          </p>
         </td>
         <td>{{ enseignant.nbHeure }}</td>
         <td>{{ enseignant.tauxHoraire }}</td>
         <td>{{ enseignant.nbHeure * enseignant.tauxHoraire }}</td>
-        <td><button @click="deleteEnseignant(enseignant.matricule)"><i class="fa-solid action delete"><img src="../assets/images/delete.png" class="icon-img"></i></button></td>
-        <td><RouterLink :to="{ path: '/'+JSON.stringify(enseignant)+'/edit'}"><button ><i class="fa-solid action edit"><img src="../assets/images/edit.png" class="icon-img"></i></button></Routerlink></td>
+        <td style="padding-right: 0px"><button @click="deleteEnseignant(enseignant.matricule)"><i class="fa-solid action delete"><img src="../assets/images/delete.png" class="icon-img"></i></button></td>
+        <td style="padding-left: 0px"><RouterLink :to="{ path: '/'+JSON.stringify(enseignant)+'/edit'}"><button ><i class="fa-solid action edit"><img src="../assets/images/edit.png" class="icon-img"></i></button></Routerlink></td>
       </tr>
     </table>
+
     <div v-show="viewController">
       <button class="btn btn-primary show-btn" @click="showMore(more = true)" v-if="more == false">Voir tout</button>
       <button class="btn btn-primary show-btn" @click="showLess(more = false)" v-else>Voir moins</button>
     </div>
-    <!-- <div class="box" v-show="addForm == false">
+
+    <!-- 
+    <div class="box" v-show="addForm == false">
       <ul class="box-content" v-for="enseignant in this.enseignants" :key="enseignant.matricule">
-        <p class="photo-container"><img src="../assets/images/lecture.png" alt="photo" class="photo"></p>
+        <p class="photo-container"><img src="../assets/images/user.png" alt="photo" class="photo"></p>
         <li>
           <ul class="btn-control">
             <li><button @click="deleteEnseignant(enseignant.matricule)"><i class="fa-solid action delete"><img src="../assets/images/delete.png" class="icon-img"></i></button></li>
@@ -50,14 +57,15 @@
           <li>Prestation: {{ enseignant.nbHeure * enseignant.tauxHoraire }}</li>
         </div>
       </ul>
-    </div> -->
+    </div> 
+    -->
     <div v-show="addForm == false">
       <h6 class="prest-totale">Prestation totale : {{ prestationTotal }}</h6>
     </div>
   </div>
 
   <div v-show="addForm">
-    <Ajout v-on:dataFromAddForm="createEnseignant" v-on:cancelForm="addForm = false, check = false" :isDuplicate=check v-on:checkMatricule="checkMatricule" />
+    <Ajout v-on:dataFromAddForm="createEnseignant" v-on:cancelForm="limitView(addForm = false, check = false)" :isDuplicate=check v-on:checkMatricule="checkMatricule" />
   </div>
 
   <div class="chart-container" v-show="addForm == false">
@@ -70,10 +78,10 @@
   import axios from 'axios';
   import { ref, onMounted } from 'vue';
   import { Chart, registerables } from 'chart.js';
-  import Ajout from './Ajout.vue'
-  import getHost from "./host.js"
   Chart.register(...registerables);
   import "../styles/enseignant.css"
+  import Ajout from './Ajout.vue'
+  import getHost from "./host.js"
 
   export default {
     name: 'Enseignants',
@@ -174,7 +182,7 @@
         }
       },
 
-      // Manao lecture ny localStorage au moment ny chargement ny Enseignant.vue
+      // read localStorage
       updateEnseignant() {
         if(JSON.parse(localStorage.getItem("dataUpdated")) != null) {
           axios.put(getHost() + 'Enseignant/updateEnseignant/'+JSON.parse(localStorage.getItem("dataUpdated")).matricule, JSON.parse(localStorage.getItem("dataUpdated"))) 

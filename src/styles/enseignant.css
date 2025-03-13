@@ -2,30 +2,33 @@
     max-width: 400px;
     margin: auto;
 }
-/* Here we go */
+
 table{
     width: 100%;
     padding: 16px;
     margin: 16px;
-    border-radius: 80px;
     border-collapse: collapse;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.2), -1px -1px 8px rgba(0, 0, 0, 0.2);
 }
 th{
-    padding: 8px;
+    padding: 16px;
     font-weight: bold;
     background-color: #006f9e;
     color: #ffffff;
 }
 td{
-    padding: 16px;
+    padding: 8px 16px;
     border-bottom: 1px solid rgba(0,0,0,0.3);
 }
-.photo-2{
-    width: 60px;
-    height: 60px;
-    padding-right: 0px;
+.first-char{
+    font-size: 24px;
+    text-align: center;
     border-radius: 100%;
-    border: 1px solid #b4b4b4;
+    color: white;
+    margin-left: 8px;
+    padding: 8px 6px;
+    background-color: #037020;
+    text-transform: uppercase;
 } /* end */
 
 button{
@@ -49,7 +52,6 @@ button{
 .fa-add:hover{
     transform: scale(1.4);
 }
-
 .btn-menu{
     padding: 8px;
     margin: 8px;
@@ -81,10 +83,10 @@ button{
     transform: scale(1.5);
 }
 .prest-totale{
-    background-color: #136423;
-    color: #ffffff;
+    background-color: #FFCE56;
     padding: 16px;
-    margin: 24px;
+    margin: 16px;
+    width: 100%;
 }
 .show-btn{
     border-radius: 0px;

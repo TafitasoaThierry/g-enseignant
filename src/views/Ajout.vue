@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-5 form">
+  <div class="container mt-5">
     <div class="card">
       <div>
         <h4>Ajouter un enseignant</h4>
@@ -66,23 +66,24 @@
       };
     },
     methods: {
+      // send object to the parent(Enseignant.vue)
       createEnseignant() {
         this.$emit("dataFromAddForm", this.model.enseignant, false);
-        this.cleanForm();
+        this.clearForm();
       },
 
-      // alefa any @ parent ny 'false' de assignena @ addForm, tsy miseho @'izay ny ajout.vue component satria v-show = false
+      // set addForm in parent to 'false'
       cancel() {
         this.$emit("cancelForm", false);
-        this.cleanForm();
+        this.clearForm();
       },
 
-      // alefa any @ parent ny matricule de alaina @ alalany props ny valeur de retour (false na true)
+      // send matricule to parent and get response in props
       checkMatricule(){
         this.$emit("checkMatricule", this.model.enseignant.matricule);
       },
 
-      cleanForm(){
+      clearForm(){
         this.model.enseignant.matricule = "";
         this.model.enseignant.nom = "";
         this.model.enseignant.nbHeure = 0;
@@ -92,3 +93,8 @@
   };
 </script>
 
+<style scoped>
+  .card{
+    margin-left: 0;
+  }
+</style>

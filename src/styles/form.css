@@ -1,5 +1,4 @@
 .container{
-  margin: 0 auto;
   margin-top: 100px;
 } 
 h4{
@@ -9,12 +8,18 @@ h4{
   color: #0084BB;
 }
 .card{
-  border: none;
-  border: 1px solid #0084BB;
-  padding: 16px;
+  /* border: 1px solid #0084BB;
   border-radius: 0px;
   margin: 0 auto;
-  margin-bottom: 0px;
+  width: 60%;
+  margin-left: 10%; */
+  position: fixed;
+  top: 10%;
+  padding: 16px;
+  width: 60%;
+  margin: auto;
+  z-index: 101;
+  /* box-shadow: 12px 12px 12px 12px black; */
 }
 .control-btn{
   margin: 8px 8px 8px auto;
@@ -22,6 +27,9 @@ h4{
   width: 200px;
 }
 @media screen and (max-width : 740px) {
+  .card{
+    width: 100%;
+  }
   .control-btn{
     width: 100%;
   }

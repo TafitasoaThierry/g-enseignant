@@ -1,6 +1,6 @@
 <template>
   <header>
-    <div><img src="./assets/images/lecture.png" alt="logo" class="logo"><i class="fa-solid" style="font-size: 18px;"> g - </i> <b style="font-size: 18px;">Enseignants</b></div>
+    <div><img src="./assets/images/lecture.png" alt="logo" class="logo"><i class="fa-solid" style="font-size: 18px;">Enseignants</i></div>
   </header>
   <RouterView />
 </template>

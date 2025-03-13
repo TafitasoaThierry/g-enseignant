@@ -5,40 +5,40 @@
         <h4>Modifier un enseignant</h4>
       </div>
       <div class="card-body">
-          <div class="mb-3">
-            <label for="matricule">Matricule</label>
-            <input required readonly type="text"  id="matricule" v-model="model.enseignant.matricule" class="form-control">
-          </div>
-          <div class="mb-3">
-            <label for="nom">Nom</label>
-            <input required type="text" @keyup="setPath()" id="nom" v-model="model.enseignant.nom" class="form-control">
-          </div>
-          <div class="mb-3">
-            <label for="nbHeure">Nombre d'heures</label>
-            <input required type="number" @keyup="setPath()" id="nbHeure" v-model="model.enseignant.nbHeure" class="form-control">
-          </div>
-          <div class="mb-3">
-            <label for="tauxhr">Taux horaires</label>
-            <input required type="number" @keyup="setPath()" id="tauxhr" v-model="model.enseignant.tauxHoraire" class="form-control">
-          </div>
-          <div class="mb-3">
-            <RouterLink :to="{ path: '/'}"><button type="button" @click="cancel" class="btn btn-primary control-btn cancel">Annuler</button></RouterLink>
-            <RouterLink :to="{ path: path}">
-              <button type="button" @click="setData()" class="btn btn-primary control-btn save"
-                :disabled="
-                  (
-                    (model.enseignant.matricule.length == 0) ||
-                    (model.enseignant.nom.length == 0) ||
-                    (model.enseignant.nbHeure.length == 0) ||
-                    (model.enseignant.nbHeure < 0) ||
-                    (model.enseignant.tauxHoraire.length == 0) ||
-                    (model.enseignant.tauxHoraire < 0)
-                  )"
-              >
-                Enregistrer
-              </button>
-            </RouterLink>
-          </div>
+        <div class="mb-3">
+          <label for="matricule">Matricule</label>
+          <input required readonly type="text"  id="matricule" v-model="model.enseignant.matricule" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="nom">Nom</label>
+          <input required type="text" @keyup="setPath()" id="nom" v-model="model.enseignant.nom" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="nbHeure">Nombre d'heures</label>
+          <input required type="number" @keyup="setPath()" id="nbHeure" v-model="model.enseignant.nbHeure" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="tauxhr">Taux horaires</label>
+          <input required type="number" @keyup="setPath()" id="tauxhr" v-model="model.enseignant.tauxHoraire" class="form-control">
+        </div>
+        <div class="mb-3">
+          <RouterLink :to="{ path: '/'}"><button type="button" @click="cancel" class="btn btn-primary control-btn cancel">Annuler</button></RouterLink>
+          <RouterLink :to="{ path: path}">
+            <button type="button" @click="setData()" class="btn btn-primary control-btn save"
+              :disabled="
+                (
+                  (model.enseignant.matricule.length == 0) ||
+                  (model.enseignant.nom.length == 0) ||
+                  (model.enseignant.nbHeure.length == 0) ||
+                  (model.enseignant.nbHeure < 0) ||
+                  (model.enseignant.tauxHoraire.length == 0) ||
+                  (model.enseignant.tauxHoraire < 0)
+                )"
+            >
+              Enregistrer
+            </button>
+          </RouterLink>
+        </div>
       </div>
     </div>
   </div>
@@ -78,8 +78,6 @@
           tauxHoraire: JSON.parse(this.$route.params.object).tauxHoraire
         }
         
-        // XD
-        
         // axios.get('http://127.0.0.1:9090/Enseignant/readEnseignant')
         //   .then(response => {
         //     this.enseignants = response.data;
@@ -115,17 +113,13 @@
           (this.model.enseignant.tauxHoraire < 0)
         ) ? this.path = "edit" : this.path = "/"; 
       }
-
-      // cancel(){
-      //   this.$emit("cancelForm", false);
-      // }
     }
   };
 </script>
 
 <style scoped>
 .card{
-  margin-top: 100px;
+  /* margin-top: 100px; */
 }
 </style>
   
