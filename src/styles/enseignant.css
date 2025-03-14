@@ -1,8 +1,14 @@
 .chart-container{
     max-width: 400px;
-    margin: auto;
+    margin: 24px;
 }
-
+.chart{
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
 table{
     width: 100%;
     padding: 16px;
@@ -25,6 +31,7 @@ td{
     text-align: center;
     border-radius: 100%;
     color: white;
+    width: 50px;
     margin-left: 8px;
     padding: 8px 6px;
     background-color: #037020;
@@ -82,16 +89,34 @@ button{
     border: 1px solid rgb(56, 58, 56);
     transform: scale(1.5);
 }
+.prest{
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+    flex-wrap: wrap;
+    padding: 16px;
+    width: 40%;
+}
+.prest-min{
+    background-color: #FF6384;
+    padding: 16px;
+    width: 100%;
+}
+.prest-max{
+    background-color: #36A2EB;
+    padding: 16px;
+    width: 100%;
+}
 .prest-totale{
     background-color: #FFCE56;
     padding: 16px;
-    margin: 16px;
     width: 100%;
 }
 .show-btn{
     border-radius: 0px;
     padding: 8px 16px;
     margin: 16px;
+    width: 33%;
 }
 .search{
     display: flex;

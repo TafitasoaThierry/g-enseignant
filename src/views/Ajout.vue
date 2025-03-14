@@ -23,7 +23,6 @@
           <input required type="number" id="tauxHoraire" v-model="model.enseignant.tauxHoraire" class="form-control">
         </div>
         <div class="mb-3 btn-control-group">
-          <button type="button" class="btn btn-primary control-btn cancel" @click="cancel">Annuler</button>
           <button type="button" @click="createEnseignant" class="btn btn-primary control-btn save" 
             :disabled="
               (
@@ -38,6 +37,7 @@
           >
             Enregistrer
           </button>
+          <button type="button" class="btn btn-primary control-btn cancel" @click="cancel">Annuler</button>
         </div>
       </div>
     </div>
@@ -94,7 +94,5 @@
 </script>
 
 <style scoped>
-  .card{
-    margin-left: 0;
-  }
+
 </style>

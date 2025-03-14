@@ -1,5 +1,6 @@
 <template>
-  <div class="container">
+  <div>
+    <div class="container">
     <div class="search" v-show="addForm == false">
       <div class="option" v-show="addForm == false">
         <button v-on:click="addForm = true; viewController = false"><i class="fa-solid fa-add"></i></button>
@@ -17,7 +18,7 @@
         <th colspan="2" style="padding: 16px 26px;">Actions</th>
       </tr>
       <tr v-for="enseignant in this.enseignants" :key="enseignant.matricule">
-        <td>
+        <td style="width: 60px">
           <p class="first-char">{{ enseignant.nom[0] }}</p>
         </td>
         <td style="padding-left: 0px">
@@ -38,40 +39,23 @@
       <button class="btn btn-primary show-btn" @click="showMore(more = true)" v-if="more == false">Voir tout</button>
       <button class="btn btn-primary show-btn" @click="showLess(more = false)" v-else>Voir moins</button>
     </div>
-
-    <!-- 
-    <div class="box" v-show="addForm == false">
-      <ul class="box-content" v-for="enseignant in this.enseignants" :key="enseignant.matricule">
-        <p class="photo-container"><img src="../assets/images/user.png" alt="photo" class="photo"></p>
-        <li>
-          <ul class="btn-control">
-            <li><button @click="deleteEnseignant(enseignant.matricule)"><i class="fa-solid action delete"><img src="../assets/images/delete.png" class="icon-img"></i></button></li>
-            <li><RouterLink :to="{ path: '/'+JSON.stringify(enseignant)+'/edit'}"><button ><i class="fa-solid action edit"><img src="../assets/images/edit.png" class="icon-img"></i></button></Routerlink></li>
-          </ul>
-        </li>
-        <li style="padding: 4px 16px;"><b>{{ enseignant.matricule }}</b></li>
-        <li style="padding: 0px 16px; line-height: 25px;"><em>{{ enseignant.nom }}</em></li>
-        <div class="text-data">
-          <li>Nombre d'heures: {{ enseignant.nbHeure }}</li>
-          <li>Taux horaire: {{ enseignant.tauxHoraire }}</li>
-          <li>Prestation: {{ enseignant.nbHeure * enseignant.tauxHoraire }}</li>
-        </div>
-      </ul>
-    </div> 
-    -->
-    <div v-show="addForm == false">
-      <h6 class="prest-totale">Prestation totale : {{ prestationTotal }}</h6>
-    </div>
   </div>
 
   <div v-show="addForm">
-    <Ajout v-on:dataFromAddForm="createEnseignant" v-on:cancelForm="limitView(addForm = false, check = false)" :isDuplicate=check v-on:checkMatricule="checkMatricule" />
+    <Ajout v-on:dataFromAddForm="createEnseignant" v-on:cancelForm="limitView(addForm = false, check = false, more = false)" :isDuplicate=check v-on:checkMatricule="checkMatricule" />
   </div>
 
-  <div class="chart-container" v-show="addForm == false">
-    <canvas ref="chartCanvas"></canvas>
+  <div class="chart" v-show="addForm == false">
+    <div class="prest">
+      <p class="prest-totale">Prestation totale : {{ prestationTotal }}</p>
+      <p class="prest-min">Prestation minimum : {{ minPrestation }}</p>
+      <p class="prest-max">Prestation maximum : {{ maxPrestation }}</p>
+    </div>
+    <div class="chart-container">
+      <canvas ref="chartCanvas"></canvas>
+    </div>
   </div>
-
+  </div>
 </template>
 
 <script>
@@ -98,6 +82,8 @@
         enseignants: [],
         allEnseignants: [],
         prestationTotal: 0,
+        minPrestation: 0,
+        maxPrestation: 0
       };
     },
     mounted() {
@@ -159,10 +145,12 @@
             }
 
             this.prestationTotal = 0;
+            this.maxPrestation = 0;
+            this.minPrestation = 0;
             this.allEnseignants.forEach(enseignant => {
               this.prestationTotal += (enseignant.nbHeure * enseignant.tauxHoraire);
-              this.grapheCamembert();
             });
+            this.allEnseignants.length == 0 ? this.chartInstance.destroy() : this.grapheCamembert();
           })
           .catch(error => {
             console.error('Il y a eu une erreur lors de la récupération des enseignants:', error);
@@ -204,8 +192,8 @@
 
         // Calcul du minimum, maximum et total
         const prestations = this.allEnseignants.map(e => e.nbHeure * e.tauxHoraire);
-        const minPrestation = Math.min(...prestations);
-        const maxPrestation = Math.max(...prestations);
+        this.minPrestation = Math.min(...prestations);
+        this.maxPrestation = Math.max(...prestations);
         const totalPrestation = prestations.reduce((acc, val) => acc + val, 0);
 
         const ctx = this.$refs.chartCanvas.getContext("2d");
@@ -213,10 +201,10 @@
         this.chartInstance = new Chart(ctx, {
           type: "pie",
           data: {
-            labels: ["Minimum", "Maximum", "Total"],
+            // labels: ["Minimum", "Maximum", "Totale"],
             datasets: [
               {
-                data: [minPrestation, maxPrestation, totalPrestation],
+                data: [this.minPrestation, this.maxPrestation, totalPrestation],
                 backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
               },
             ],

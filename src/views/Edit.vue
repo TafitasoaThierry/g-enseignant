@@ -21,8 +21,7 @@
           <label for="tauxhr">Taux horaires</label>
           <input required type="number" @keyup="setPath()" id="tauxhr" v-model="model.enseignant.tauxHoraire" class="form-control">
         </div>
-        <div class="mb-3">
-          <RouterLink :to="{ path: '/'}"><button type="button" @click="cancel" class="btn btn-primary control-btn cancel">Annuler</button></RouterLink>
+        <div class="mb-3 btn-control-group">
           <RouterLink :to="{ path: path}">
             <button type="button" @click="setData()" class="btn btn-primary control-btn save"
               :disabled="
@@ -38,6 +37,7 @@
               Enregistrer
             </button>
           </RouterLink>
+          <RouterLink :to="{ path: '/'}"><button type="button" @click="cancel" class="btn btn-primary control-btn cancel">Annuler</button></RouterLink>
         </div>
       </div>
     </div>
@@ -118,8 +118,24 @@
 </script>
 
 <style scoped>
-.card{
-  /* margin-top: 100px; */
-}
+  .container{
+    margin: 0 auto;
+  }
+  .card{
+    margin-top: 100px;
+    width: 500px;
+  }
+  @media screen and (max-width : 740px) {
+    .card{
+      width: 100%;
+    }
+    .control-btn{
+      width: 100%;
+    }
+    .card{
+      padding: 16px 0px;
+      border: none;
+    }
+  }
 </style>
   

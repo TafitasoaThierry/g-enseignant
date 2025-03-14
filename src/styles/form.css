@@ -8,24 +8,24 @@ h4{
   color: #0084BB;
 }
 .card{
-  /* border: 1px solid #0084BB;
-  border-radius: 0px;
-  margin: 0 auto;
-  width: 60%;
-  margin-left: 10%; */
-  position: fixed;
-  top: 10%;
   padding: 16px;
-  width: 60%;
   margin: auto;
-  z-index: 101;
-  /* box-shadow: 12px 12px 12px 12px black; */
+  z-index: 98;
+  border-radius: 0px;
+  width: 500px;
+  box-shadow: 4px 4px 600px 600px rgba(0, 0, 0, 0.5), -4px -4px 600px 600px rgba(0, 0, 0, 0.5);
 }
+
 .control-btn{
   margin: 8px 8px 8px auto;
   padding: 8px;
-  width: 200px;
+  width: 100%;
 }
+/* .btn-control-group{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+} */
 @media screen and (max-width : 740px) {
   .card{
     width: 100%;

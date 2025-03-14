@@ -1,8 +1,11 @@
 <template>
   <header>
-    <div><img src="./assets/images/lecture.png" alt="logo" class="logo"><i class="fa-solid" style="font-size: 18px;">Enseignants</i></div>
+    <div><img src="./assets/images/lecture.png" alt="logo" class="logo"><i class="fa-solid" style="font-size: 14px;">Enseignants</i></div>
   </header>
-  <RouterView />
+  <main>
+    <RouterView />
+  </main>
+  <p class="small">Kely loatra<br>width > 790px</p>
 </template>
 
 <script setup>
@@ -36,5 +39,24 @@
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+  .small{
+    margin-top: 200px;
+    color: #0084BB;
+    text-align: center;
+    display: none;
+    font-size: 20px;
+  }
+  main{
+    display: block;
+  }
+  @media screen and (max-width: 790px){
+    main{
+      display: none;
+    }
+    .small{
+      display: block;
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
   }
 </style>
