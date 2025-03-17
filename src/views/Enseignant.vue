@@ -7,7 +7,7 @@
         </div>
         <em style="padding: 8px 0px">Rechercher par</em>
         <input type="text" class="form-control search-input" placeholder="Nom ou Matricule" v-model="search" @keyup="research()">
-        <button @click="reset()" v-show="search.length > 0" class="reset"><i class="fas">X</i></button>
+        <button @click="readEnseignant()" v-show="search.length > 0" class="reset"><i class="fas">X</i></button>
       </div>
       
       <table class="table-info" v-show="addForm == false">
