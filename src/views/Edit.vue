@@ -77,26 +77,6 @@
           nbHeure: JSON.parse(this.$route.params.object).nbHeure,
           tauxHoraire: JSON.parse(this.$route.params.object).tauxHoraire
         }
-        
-        // axios.get('http://127.0.0.1:9090/Enseignant/readEnseignant')
-        //   .then(response => {
-        //     this.enseignants = response.data;
-        //     const enseignantfind = this.enseignants.find(enseignant => enseignant.matricule == this.$route.params.matricule);
-            
-        //     if (enseignantfind) {
-        //       this.model.enseignant = {
-        //         matricule: enseignantfind.matricule,
-        //         nom: enseignantfind.nom,
-        //         nbHeure: enseignantfind.nbHeure,
-        //         tauxHoraire: enseignantfind.tauxHoraire
-        //       }
-        //     } else {
-        //       console.log("Aucun enseignant trouvé avec ce matricule.");
-        //     }
-        //   })
-        //   .catch(error => {
-        //     console.error('Il y a eu une erreur lors de la récupération des enseignants:', error);
-        //   });
       },
 
       setData(){

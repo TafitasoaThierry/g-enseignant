@@ -97,20 +97,20 @@ button{
     padding: 16px;
     width: 40%;
 }
-.prest-min{
-    background-color: #FF6384;
+.prest-max, .prest-min, .prest-totale{
     padding: 16px;
     width: 100%;
+    border-radius: 8px;
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.2), -1px -1px 8px rgba(0, 0, 0, 0.2);
+}
+.prest-min{
+    background-color: #FF6384;
 }
 .prest-max{
     background-color: #36A2EB;
-    padding: 16px;
-    width: 100%;
 }
 .prest-totale{
     background-color: #FFCE56;
-    padding: 16px;
-    width: 100%;
 }
 .show-btn{
     border-radius: 0px;
@@ -128,4 +128,8 @@ button{
 .search-input{
     margin: 16px 8px;
     width: 40%;
+}
+.reset{
+    padding: 8px;
+    color: #006f9e;
 }

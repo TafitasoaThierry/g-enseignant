@@ -1,60 +1,64 @@
 <template>
   <div>
     <div class="container">
-    <div class="search" v-show="addForm == false">
-      <div class="option" v-show="addForm == false">
-        <button v-on:click="addForm = true; viewController = false"><i class="fa-solid fa-add"></i></button>
+      <div class="search" v-show="addForm == false">
+        <div class="option" v-show="addForm == false">
+          <button v-on:click="addForm = true; viewController = false"><i class="fa-solid fa-add"></i></button>
+        </div>
+        <em style="padding: 8px 0px">Rechercher par</em>
+        <input type="search" class="form-control search-input" placeholder="Nom ou Matricule" v-model="search" @keyup="research()">
+        <button @click="readEnseignant()" v-show="search.length > 0" class="reset"><i class="fas">X</i></button>
       </div>
-      <em style="padding: 8px 0px">Rechercher par</em>
-      <input type="text" class="form-control search-input" placeholder="Nom ou Matricule">
-    </div>
-    
-    <table class="table-info" v-show="addForm == false">
-      <tr>
-        <th colspan="2" style="padding: 16px 26px;">Nom</th>
-        <th>Nombre d'heures</th>
-        <th>Taux horaire</th>
-        <th>Prestation</th>
-        <th colspan="2" style="padding: 16px 26px;">Actions</th>
-      </tr>
-      <tr v-for="enseignant in this.enseignants" :key="enseignant.matricule">
-        <td style="width: 60px">
-          <p class="first-char">{{ enseignant.nom[0] }}</p>
-        </td>
-        <td style="padding-left: 0px">
-          <p>
-            <em>{{ enseignant.nom }}</em><br>
-            <b>Matricule: {{ enseignant.matricule }}</b>
-          </p>
-        </td>
-        <td>{{ enseignant.nbHeure }}</td>
-        <td>{{ enseignant.tauxHoraire }}</td>
-        <td>{{ enseignant.nbHeure * enseignant.tauxHoraire }}</td>
-        <td style="padding-right: 0px"><button @click="deleteEnseignant(enseignant.matricule)"><i class="fa-solid action delete"><img src="../assets/images/delete.png" class="icon-img"></i></button></td>
-        <td style="padding-left: 0px"><RouterLink :to="{ path: '/'+JSON.stringify(enseignant)+'/edit'}"><button ><i class="fa-solid action edit"><img src="../assets/images/edit.png" class="icon-img"></i></button></Routerlink></td>
-      </tr>
-    </table>
+      
+      <table class="table-info" v-show="addForm == false">
+        <tr>
+          <th colspan="2" style="padding: 16px 26px;">Nom</th>
+          <th>Nombre d'heures</th>
+          <th>Taux horaire</th>
+          <th>Prestation</th>
+          <th colspan="2" style="padding: 16px 26px;">Actions</th>
+        </tr>
+        <tr v-for="enseignant in this.enseignants" :key="enseignant.matricule">
+          <td style="width: 60px">
+            <p class="first-char">{{ enseignant.nom[0] }}</p>
+          </td>
+          <td style="padding-left: 0px">
+            <p>
+              <em>{{ enseignant.nom }}</em><br>
+              <b>Matricule: {{ enseignant.matricule }}</b>
+            </p>
+          </td>
+          <td>{{ enseignant.nbHeure }}</td>
+          <td>{{ enseignant.tauxHoraire }}</td>
+          <td>{{ enseignant.nbHeure * enseignant.tauxHoraire }}</td>
+          <td style="padding-right: 0px"><button @click="deleteEnseignant(enseignant.matricule)"><i class="fa-solid action delete"><img src="../assets/images/delete.png" class="icon-img"></i></button></td>
+          <td style="padding-left: 0px"><RouterLink :to="{ path: '/'+JSON.stringify(enseignant)+'/edit'}"><button ><i class="fa-solid action edit"><img src="../assets/images/edit.png" class="icon-img"></i></button></Routerlink></td>
+        </tr>
+      </table>
 
-    <div v-show="viewController">
-      <button class="btn btn-primary show-btn" @click="showMore(more = true)" v-if="more == false">Voir tout</button>
-      <button class="btn btn-primary show-btn" @click="showLess(more = false)" v-else>Voir moins</button>
-    </div>
-  </div>
+      <h3 style="text-align: center;" v-show="notFound && search.length > 0">Enseignant introuvable</h3>
 
-  <div v-show="addForm">
-    <Ajout v-on:dataFromAddForm="createEnseignant" v-on:cancelForm="limitView(addForm = false, check = false, more = false)" :isDuplicate=check v-on:checkMatricule="checkMatricule" />
-  </div>
+      <div v-show="viewController">
+        <button class="btn btn-primary show-btn" @click="showMore(more = true)" v-if="more == false">Voir tout</button>
+        <button class="btn btn-primary show-btn" @click="showLess(more = false)" v-else>Voir moins</button>
+      </div>
 
-  <div class="chart" v-show="addForm == false">
-    <div class="prest">
-      <p class="prest-totale">Prestation totale : {{ prestationTotal }}</p>
-      <p class="prest-min">Prestation minimum : {{ minPrestation }}</p>
-      <p class="prest-max">Prestation maximum : {{ maxPrestation }}</p>
     </div>
-    <div class="chart-container">
-      <canvas ref="chartCanvas"></canvas>
+
+    <div v-show="addForm">
+      <Ajout v-on:dataFromAddForm="createEnseignant" v-on:cancelForm="limitView(addForm = false, check = false, more = false)" :isDuplicate=check v-on:checkMatricule="checkMatricule" />
     </div>
-  </div>
+
+    <div class="chart" v-show="addForm == false">
+      <div class="prest">
+        <p class="prest-totale">Prestation totale : {{ prestationTotal }}</p>
+        <p class="prest-min">Prestation minimum : {{ minPrestation }}</p>
+        <p class="prest-max">Prestation maximum : {{ maxPrestation }}</p>
+      </div>
+      <div class="chart-container">
+        <canvas ref="chartCanvas"></canvas>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -74,6 +78,8 @@
     },
     data() {
       return {
+        search: "",
+        notFound: true,
         viewController: false,
         more: false,
         deleted: false,
@@ -92,6 +98,29 @@
       this.grapheCamembert();
     },
     methods: {
+      research(){
+        if(this.search.length > 0){
+          let pattern = new RegExp(this.search, "i");
+          this.enseignants = [];
+
+          this.allEnseignants.forEach((enseignant) => {
+            if((enseignant.nom.search(pattern) >= 0) || (enseignant.matricule.search(pattern) >= 0)){
+              this.enseignants.push(enseignant);
+              this.notFound = false;
+              this.viewController = false;
+            }
+          })
+
+          if(this.enseignants.length == 0){
+            this.notFound = true;
+          }
+
+        }else{
+          this.more = false;
+          this.readEnseignant();
+        }
+      },
+
       showMore(){
           this.enseignants = this.allEnseignants;
           this.more = true;
@@ -136,9 +165,11 @@
         axios.get(getHost() + 'Enseignant/readEnseignant') 
           .then(response => {
             this.allEnseignants = response.data.reverse();
+            this.search = "";
+            this.allEnseignants.length <= 3 ? this.viewController = false : this.viewController = true;
+
             if(this.deleted){
-              this.allEnseignants.length <= 3 ? this.viewController = false : this.viewController = true;
-              this.enseignants = this.allEnseignants;
+              this.more == true ? this.enseignants = this.allEnseignants : this.limitView();
               this.deleted = false;
             }else{
               this.limitView();
