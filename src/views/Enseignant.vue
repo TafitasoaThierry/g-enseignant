@@ -6,7 +6,7 @@
           <button v-on:click="addForm = true; viewController = false"><i class="fa-solid fa-add"></i></button>
         </div>
         <em style="padding: 8px 0px">Rechercher par</em>
-        <input type="search" class="form-control search-input" placeholder="Nom ou Matricule" v-model="search" @keyup="research()">
+        <input type="text" class="form-control search-input" placeholder="Nom ou Matricule" v-model="search" @keyup="research()">
         <button @click="readEnseignant()" v-show="search.length > 0" class="reset"><i class="fas">X</i></button>
       </div>
       
