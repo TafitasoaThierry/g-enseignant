@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="content">
     <div class="container">
       <div class="search" v-show="addForm == false">
         <div class="option" v-show="addForm == false">
@@ -7,7 +7,7 @@
         </div>
         <em style="padding: 8px 0px">Rechercher par</em>
         <input type="text" class="form-control search-input" placeholder="Nom ou Matricule" v-model="search" @keyup="research()">
-        <button @click="readEnseignant()" v-show="search.length > 0" class="reset"><i class="fas">X</i></button>
+        <button @click="reset()" v-show="search.length > 0" class="reset"><i class="fas">X</i></button>
       </div>
       
       <table class="table-info" v-show="addForm == false">
@@ -59,6 +59,9 @@
         <canvas ref="chartCanvas"></canvas>
       </div>
     </div>
+  </div>
+  <div class="loading">
+    
   </div>
 </template>
 
@@ -124,6 +127,9 @@
       reset(){
         this.search="";
         this.limitView();
+        if(this.more == true){
+          this.more = false;
+        }
       },
 
       showMore(){

@@ -49,6 +49,13 @@
   }
   main{
     display: block;
+    /*
+    margin-top: -15px; 
+    background-image: url('./assets/images/cubes.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    */
   }
   @media screen and (max-width: 790px){
     main{

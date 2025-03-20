@@ -15,17 +15,11 @@ h4{
   width: 500px;
   box-shadow: 4px 4px 600px 600px rgba(0, 0, 0, 0.5), -4px -4px 600px 600px rgba(0, 0, 0, 0.5);
 }
-
 .control-btn{
   margin: 8px 8px 8px auto;
   padding: 8px;
   width: 100%;
 }
-/* .btn-control-group{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-} */
 @media screen and (max-width : 740px) {
   .card{
     width: 100%;
